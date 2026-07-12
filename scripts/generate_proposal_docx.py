@@ -367,12 +367,18 @@ bullet('KPI Strip: Has role="region" with aria-label="National summary KPIs."')
 
 doc.add_heading("Responsive Layout", level=2)
 
-para("The dashboard adapts fluidly across four breakpoints:")
+para("The dashboard adapts fluidly across four breakpoints with mobile-first design:")
 
-bullet("320px (mobile): Single-column layout, stacked filters, scrollable table.")
-bullet("768px (tablet): Two-column grid for charts and maps.")
-bullet("1024px (desktop): Full five-column grid layout with side-by-side panels.")
+bullet("320px (mobile): Single-column layout, stacked filters, scrollable table. Charts scale to h-56. Map scales to h-64. KPI values use text-xl.")
+bullet("768px (tablet): Two-column grid for charts and maps. Filters display inline. Chart dropdown stacks below title.")
+bullet("1024px (desktop): Full five-column grid layout with side-by-side panels. Charts use h-72. Map uses h-80.")
 bullet("1920px (wide): Max-width container (1180px), centered content.")
+
+para(
+    "All interactive elements have touch targets >= 44x44 CSS pixels. Select triggers adapt from "
+    "full-width on mobile to fixed-width on desktop. The scorecard table supports horizontal "
+    "scrolling on narrow screens. The Leaflet popup uses max-width: 80vw to prevent overflow."
+)
 
 doc.add_heading("Keyboard Navigation", level=2)
 
@@ -380,6 +386,13 @@ para(
     "All interactive elements are reachable via Tab. Filter chips are operable with Enter/Space. "
     "Select dropdowns support arrow-key navigation. The Leaflet map supports zoom via keyboard. "
     "The theme toggle button is accessible via Tab."
+)
+
+para(
+    "Keyboard shortcuts provide power-user access: pressing ? opens a shortcut overlay listing "
+    "12 shortcuts. M focuses the month filter, R resets all filters, D toggles dark/light mode, "
+    "and 1-4 jump to dashboard sections. Shortcuts are disabled when typing in input fields to "
+    "avoid conflicts."
 )
 
 # ── SECTION 5: Dataset Binding & Asset Licensing ───────────────────────

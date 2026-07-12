@@ -101,7 +101,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
         <h2 id='trend-heading' className='text-xl font-semibold mb-4'>
           What&apos;s changing over time
         </h2>
-        <div className='grid gap-6 lg:grid-cols-5'>
+        <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>
           <div className='lg:col-span-3'>
             <VisitorTrendChart data={trendData} />
           </div>
@@ -116,7 +116,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
         <h2 id='focus-heading' className='text-xl font-semibold mb-4'>
           Where to focus, by destination
         </h2>
-        <div className='grid gap-6 lg:grid-cols-2'>
+        <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
           <DestinationMap destinations={destinations} />
           <ScorecardTable destinations={destinations} />
         </div>
@@ -127,7 +127,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
         <h2 id='action-heading' className='text-xl font-semibold mb-4'>
           Deep dive &amp; recommended actions
         </h2>
-        <div className='grid gap-6 lg:grid-cols-5'>
+        <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>
           <div className='lg:col-span-3'>
             <ComplaintAnalysis
               data={complaintFrequencies}

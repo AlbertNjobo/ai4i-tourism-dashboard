@@ -33,7 +33,7 @@ export default function KeyboardShortcutHelp({ onClose }: Props) {
       aria-modal='true'
     >
       <Card
-        className='w-full max-w-md shadow-2xl'
+        className='w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl'
         onClick={(e) => e.stopPropagation()}
       >
         <CardHeader className='flex flex-row items-center justify-between'>

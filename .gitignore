@@ -1,8 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
+# Dependencies
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,42 +8,69 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# Next.js
+.next/
+out/
+.vercel
 
-# next.js
-/.next/
-/out/
+# Build
+build/
+dist/
 
-# production
-/build
+# Testing
+coverage/
 
-# misc
-.DS_Store
-*.pem
+# Environment
+.env
+.env.local
+.env.*.local
 
-# debug
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*.local
-.env
+# OS
+.DS_Store
+Thumbs.db
 
-# vercel
-.vercel
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# typescript
+# AI tools
+.claude/
+.codex/
+.cursor/
+.impeccable/
+
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# clerk configuration (can include secrets)
-/.clerk/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
 
-# Skills
-.agent/
-.claude/
+# Generated files (regenerate with scripts/)
+docs/AI4I_Proposal_Design.pdf
+docs/AI4I_Proposal_Design.docx
+docs/proposal-pages/
+docs/atlas-architecture.html
+docs/atlas-architecture-screenshot.png
 
-docs/
+# Lock files
+*.lock
+!pnpm-lock.yaml
+
+# Misc
+*.pem
+*.log

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Atlas — System Architecture",
+    "subtitle": "Zimbabwe Tourism Destination Insights Dashboard",
+    "output": "atlas-architecture.html"
+  },
+  "components": [
+    { "id": "user", "type": "external", "label": "Tourism Analyst", "sublabel": "Browser / Mobile", "pos": [40, 220], "size": [130, 60] },
+    { "id": "nextjs", "type": "frontend", "label": "Next.js 16", "sublabel": "App Router + SSR", "pos": [250, 100], "size": [130, 60] },
+    { "id": "csv-loader", "type": "backend", "label": "CSV Loader", "sublabel": "src/lib/csv-loader.ts", "pos": [250, 380], "size": [130, 60] },
+    { "id": "react-hook", "type": "frontend", "label": "useTourismData", "sublabel": "Client-side hook", "pos": [460, 100], "size": [130, 60] },
+    { "id": "dashboard", "type": "frontend", "label": "Dashboard View", "sublabel": "8 components", "pos": [460, 220], "size": [130, 60] },
+    { "id": "csv", "type": "database", "label": "Tourism CSV", "sublabel": "48 records", "pos": [40, 380], "size": [130, 60] },
+    { "id": "shadcn", "type": "cloud", "label": "shadcn/ui", "sublabel": "42 components", "pos": [670, 100], "size": [130, 60] },
+    { "id": "recharts", "type": "cloud", "label": "Recharts", "sublabel": "Charts", "pos": [670, 220], "size": [130, 60] },
+    { "id": "leaflet", "type": "cloud", "label": "Leaflet", "sublabel": "Interactive map", "pos": [670, 380], "size": [130, 60] },
+    { "id": "osm", "type": "external", "label": "OpenStreetMap", "sublabel": "Map tiles", "pos": [880, 380], "size": [130, 60] },
+    { "id": "theme", "type": "security", "label": "ThemeProvider", "sublabel": "Light / Dark", "pos": [460, 380], "size": [130, 60] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Next.js Application", "wraps": ["nextjs", "csv-loader", "react-hook", "dashboard", "theme"] },
+    { "kind": "region", "label": "UI Libraries", "wraps": ["shadcn", "recharts", "leaflet"] }
+  ],
+  "connections": [
+    { "from": "user", "to": "nextjs", "label": "HTTP", "variant": "emphasis" },
+    { "from": "nextjs", "to": "csv-loader", "fromSide": "bottom", "toSide": "top", "labelDy": 18 },
+    { "from": "csv-loader", "to": "csv", "label": "read", "variant": "dashed", "fromSide": "left", "toSide": "right" },
+    { "from": "nextjs", "to": "react-hook", "fromSide": "right", "toSide": "left" },
+    { "from": "react-hook", "to": "dashboard", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "labelDy": 18 },
+    { "from": "dashboard", "to": "shadcn", "label": "components" },
+    { "from": "dashboard", "to": "recharts", "label": "charts" },
+    { "from": "dashboard", "to": "leaflet", "label": "map", "fromSide": "bottom", "toSide": "top" },
+    { "from": "leaflet", "to": "osm", "label": "tiles", "variant": "dashed" },
+    { "from": "dashboard", "to": "theme", "label": "toggle", "variant": "security", "fromSide": "bottom", "toSide": "top", "labelDy": 18 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Data Flow", "items": ["CSV parsed at build time", "Props passed to client", "Filters recomputed on change", "No hardcoded values"] },
+    { "dot": "emerald", "title": "Tech Stack", "items": ["Next.js 16 + React 19", "Tailwind CSS 4 + shadcn/ui", "Recharts + Leaflet", "TypeScript"] },
+    { "dot": "rose", "title": "Accessibility", "items": ["WCAG 2.1 AA", "Keyboard shortcuts (? overlay)", "Screen-reader labels", "Responsive 320-1920px"] }
+  ]
+}

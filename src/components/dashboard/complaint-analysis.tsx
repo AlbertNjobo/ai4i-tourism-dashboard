@@ -43,7 +43,7 @@ function ComplaintChart({ data }: { data: ComplaintFrequency[] }) {
   const config = { count: { label: 'Reports' } } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -77,7 +77,7 @@ function RevenueChart({ data }: { data: RevenuePoint[] }) {
   const config = { totalSpend: { label: 'Revenue (USD)' } } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -104,7 +104,7 @@ function DemographicsChart({ data }: { data: DemographicsPoint[] }) {
   } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -162,13 +162,13 @@ export default function ComplaintAnalysis({
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4'>
           <div>
             <CardTitle className='text-base font-semibold'>{titles[view]}</CardTitle>
             <p className='text-muted-foreground text-xs'>{subtitles[view]}</p>
           </div>
           <Select value={view} onValueChange={(v) => v && setView(v as ChartView)}>
-            <SelectTrigger className='w-48 h-11' aria-label='Select chart view'>
+            <SelectTrigger className='w-full sm:w-48 h-11' aria-label='Select chart view'>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

@@ -403,13 +403,19 @@ story.append(bullet('<b>KPI Strip:</b> Has role="region" with aria-label="Nation
 story.append(subsection("Responsive Layout"))
 
 story.append(para(
-    "The dashboard adapts fluidly across four breakpoints:"
+    "The dashboard adapts fluidly across four breakpoints with mobile-first design:"
 ))
 
-story.append(bullet("<b>320px (mobile):</b> Single-column layout, stacked filters, scrollable table."))
-story.append(bullet("<b>768px (tablet):</b> Two-column grid for charts and maps."))
-story.append(bullet("<b>1024px (desktop):</b> Full five-column grid layout with side-by-side panels."))
+story.append(bullet("<b>320px (mobile):</b> Single-column layout, stacked filters, scrollable table. Charts scale to h-56. Map scales to h-64. KPI values use text-xl."))
+story.append(bullet("<b>768px (tablet):</b> Two-column grid for charts and maps. Filters display inline. Chart dropdown stacks below title."))
+story.append(bullet("<b>1024px (desktop):</b> Full five-column grid layout with side-by-side panels. Charts use h-72. Map uses h-80."))
 story.append(bullet("<b>1920px (wide):</b> Max-width container (1180px), centered content."))
+
+story.append(para(
+    "All interactive elements have touch targets >= 44x44 CSS pixels. Select triggers adapt from "
+    "full-width on mobile to fixed-width on desktop. The scorecard table supports horizontal "
+    "scrolling on narrow screens. The Leaflet popup uses max-width: 80vw to prevent overflow."
+))
 
 story.append(subsection("Keyboard Navigation"))
 
@@ -417,6 +423,13 @@ story.append(para(
     "All interactive elements are reachable via Tab. Filter chips are operable with Enter/Space. "
     "Select dropdowns support arrow-key navigation. The Leaflet map supports zoom via keyboard. "
     "The theme toggle button is accessible via Tab."
+))
+
+story.append(para(
+    "Keyboard shortcuts provide power-user access: pressing ? opens a shortcut overlay listing "
+    "12 shortcuts. M focuses the month filter, R resets all filters, D toggles dark/light mode, "
+    "and 1-4 jump to dashboard sections. Shortcuts are disabled when typing in input fields to "
+    "avoid conflicts."
 ))
 
 # ── SECTION 5: Dataset Binding & Asset Licensing ───────────────────────

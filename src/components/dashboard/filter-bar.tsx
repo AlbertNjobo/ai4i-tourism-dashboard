@@ -45,7 +45,7 @@ export default function FilterBar({
             Month
           </span>
           <Select value={filters.month} onValueChange={(v) => v && onMonthChange(v)}>
-            <SelectTrigger className='w-44 h-11' aria-label='Filter by month'>
+            <SelectTrigger className='w-full sm:w-44 h-11' aria-label='Filter by month'>
               <SelectValue placeholder='All months' />
             </SelectTrigger>
             <SelectContent>

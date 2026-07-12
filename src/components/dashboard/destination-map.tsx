@@ -60,7 +60,7 @@ export default function DestinationMap({ destinations }: Props) {
           <CardTitle className='text-base font-semibold'>Destination map</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='bg-muted h-80 animate-pulse rounded-lg' />
+          <div className='bg-muted h-64 sm:h-80 animate-pulse rounded-lg' />
         </CardContent>
       </Card>
     )
@@ -73,7 +73,7 @@ export default function DestinationMap({ destinations }: Props) {
       </CardHeader>
       <CardContent className='space-y-3'>
         <LeafletMap destinations={destinations} />
-        <div className='flex items-center gap-4 text-xs text-muted-foreground'>
+        <div className='flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-muted-foreground'>
           <span className='flex items-center gap-1.5'>
             <span className='inline-block size-2.5 rounded-full bg-red-500' />
             Low quality
@@ -169,7 +169,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
       }).addTo(map)
 
       touchTarget.bindPopup(`
-        <div style="font-family: 'IBM Plex Sans', sans-serif; min-width: 180px;">
+        <div style="font-family: 'IBM Plex Sans', sans-serif; min-width: 160px; max-width: 80vw;">
           <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">${dest.destination}</div>
           <div style="font-size: 12px; color: #666; margin-bottom: 8px;">${dest.province} &middot; ${dest.destinationType}</div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 12px;">
@@ -212,7 +212,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
   return (
     <div
       id='tourism-map'
-      className='h-80 w-full rounded-lg'
+      className='h-64 sm:h-80 w-full rounded-lg'
       style={{ zIndex: 0 }}
       role='img'
       aria-label='Interactive map of Zimbabwe tourism destinations. Circle size shows visitor volume, color shows service quality.'

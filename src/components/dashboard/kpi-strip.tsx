@@ -69,7 +69,7 @@ export default function KPIStrip({ kpis }: { kpis: KPIData }) {
 
   return (
     <div
-      className='grid gap-4 sm:grid-cols-2 lg:grid-cols-5'
+      className='grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5'
       role='region'
       aria-label='National summary KPIs'
     >
@@ -85,7 +85,7 @@ export default function KPIStrip({ kpis }: { kpis: KPIData }) {
               </span>
             </div>
             <div className='flex items-baseline gap-1'>
-              <span className='text-2xl font-semibold tabular-nums'>{item.value}</span>
+              <span className='text-xl sm:text-2xl font-semibold tabular-nums'>{item.value}</span>
               {item.unit && (
                 <span className='text-muted-foreground text-sm'>{item.unit}</span>
               )}
