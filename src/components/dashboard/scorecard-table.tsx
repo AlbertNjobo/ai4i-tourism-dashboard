@@ -36,7 +36,7 @@ export default function ScorecardTable({ destinations }: { destinations: Destina
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <CardTitle className='text-base font-semibold'>Destination scorecard</CardTitle>
+        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination scorecard</CardTitle>
       </CardHeader>
       <CardContent className='overflow-x-auto'>
         {sorted.length === 0 ? (

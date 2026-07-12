@@ -44,7 +44,7 @@ export default function DestinationMap({ destinations }: Props) {
     return (
       <Card className='ring-foreground/10 shadow-none ring-1'>
         <CardHeader>
-          <CardTitle className='text-base font-semibold'>Destination map</CardTitle>
+          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
         </CardHeader>
         <CardContent>
           <p className='text-muted-foreground text-sm'>No destinations match the current filters.</p>
@@ -57,7 +57,7 @@ export default function DestinationMap({ destinations }: Props) {
     return (
       <Card className='ring-foreground/10 shadow-none ring-1'>
         <CardHeader>
-          <CardTitle className='text-base font-semibold'>Destination map</CardTitle>
+          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
         </CardHeader>
         <CardContent>
           <div className='bg-muted h-64 sm:h-80 animate-pulse rounded-lg' />
@@ -69,7 +69,7 @@ export default function DestinationMap({ destinations }: Props) {
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <CardTitle className='text-base font-semibold'>Destination map</CardTitle>
+        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
       </CardHeader>
       <CardContent className='space-y-3'>
         <LeafletMap destinations={destinations} />
@@ -169,7 +169,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
       }).addTo(map)
 
       touchTarget.bindPopup(`
-        <div style="font-family: 'IBM Plex Sans', sans-serif; min-width: 160px; max-width: 80vw;">
+        <div style="min-width: 160px; max-width: 80vw;">
           <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">${dest.destination}</div>
           <div style="font-size: 12px; color: #666; margin-bottom: 8px;">${dest.province} &middot; ${dest.destinationType}</div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 12px;">
@@ -185,7 +185,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
       L.marker([dest.latitude, dest.longitude], {
         icon: L.divIcon({
           className: '',
-          html: `<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: #1e293b; white-space: nowrap; text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white; pointer-events: none;">${dest.destination}</div>`,
+          html: `<div style="font-size: 10px; font-weight: 500; color: #1e293b; white-space: nowrap; text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white; pointer-events: none;">${dest.destination}</div>`,
           iconAnchor: [0, -radius - 4],
         }),
       }).addTo(map)

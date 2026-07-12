@@ -37,10 +37,10 @@ export default function KeyboardShortcutHelp({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <CardHeader className='flex flex-row items-center justify-between'>
-          <CardTitle className='text-lg font-semibold'>Keyboard Shortcuts</CardTitle>
+          <CardTitle className='text-lg font-semibold' style={{ textWrap: 'balance' }}>Keyboard Shortcuts</CardTitle>
           <Button
             variant='ghost'
-            size='icon'
+            size='icon-lg'
             onClick={onClose}
             aria-label='Close shortcuts'
           >

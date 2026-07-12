@@ -43,7 +43,7 @@ function ComplaintChart({ data }: { data: ComplaintFrequency[] }) {
   const config = { count: { label: 'Reports' } } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full' role='img' aria-label='Horizontal bar chart showing complaint theme frequency across destinations'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -77,7 +77,7 @@ function RevenueChart({ data }: { data: RevenuePoint[] }) {
   const config = { totalSpend: { label: 'Revenue (USD)' } } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full' role='img' aria-label='Horizontal bar chart showing estimated total spend by destination in USD'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -104,7 +104,7 @@ function DemographicsChart({ data }: { data: DemographicsPoint[] }) {
   } satisfies ChartConfig
 
   return (
-    <ChartContainer config={config} className='h-56 sm:h-72 w-full'>
+    <ChartContainer config={config} className='h-56 sm:h-72 w-full' role='img' aria-label='Stacked bar chart showing domestic vs international visitor split by destination'>
       <ResponsiveContainer width='100%' height='100%'>
         <BarChart data={data} layout='vertical' margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' horizontal={false} />
@@ -164,7 +164,7 @@ export default function ComplaintAnalysis({
       <CardHeader>
         <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4'>
           <div>
-            <CardTitle className='text-base font-semibold'>{titles[view]}</CardTitle>
+            <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>{titles[view]}</CardTitle>
             <p className='text-muted-foreground text-xs'>{subtitles[view]}</p>
           </div>
           <Select value={view} onValueChange={(v) => v && setView(v as ChartView)}>

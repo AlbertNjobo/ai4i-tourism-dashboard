@@ -47,7 +47,7 @@ export default function InsightNarrative({ insights }: { insights: InsightData }
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <CardTitle className='text-base font-semibold'>Insight narrative</CardTitle>
+        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Insight narrative</CardTitle>
       </CardHeader>
       <CardContent>
         {bullets.length === 0 ? (

@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import {
   UsersIcon,
   DollarSignIcon,
@@ -35,84 +34,91 @@ interface KPIItem {
 }
 
 export default function KPIStrip({ kpis }: { kpis: KPIData }) {
-  const items: KPIItem[] = [
+  const metricItems: KPIItem[] = [
     {
-      icon: <UsersIcon className='size-5' />,
+      icon: <UsersIcon className='size-4' />,
       label: 'Total visitors',
       value: fmt(kpis.totalVisitors),
       delta: kpis.visitorDelta,
       deltaDirection: kpis.visitorDelta?.pct != null ? (kpis.visitorDelta.pct >= 0 ? 'up' : 'down') : undefined,
     },
     {
-      icon: <DollarSignIcon className='size-5' />,
+      icon: <DollarSignIcon className='size-4' />,
       label: 'Estimated spend',
       value: fmtUsd(kpis.totalSpend),
     },
     {
-      icon: <StarIcon className='size-5' />,
-      label: 'Avg service quality',
+      icon: <StarIcon className='size-4' />,
+      label: 'Service quality',
       value: fmt1(kpis.avgServiceQuality),
       unit: '/100',
     },
     {
-      icon: <GlobeIcon className='size-5' />,
-      label: 'Avg digital booking',
+      icon: <GlobeIcon className='size-4' />,
+      label: 'Digital booking',
       value: fmt1(kpis.avgDigitalBooking),
       unit: '%',
     },
-    {
-      icon: <AlertTriangleIcon className='size-5' />,
-      label: 'Top complaint',
-      value: kpis.topComplaint.value || '—',
-    },
   ]
+
+  const complaintItem = {
+    icon: <AlertTriangleIcon className='size-4' />,
+    label: 'Top complaint',
+    value: kpis.topComplaint.value || '—',
+  }
 
   return (
     <div
-      className='grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5'
+      className='grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
       role='region'
       aria-label='National summary KPIs'
     >
-      {items.map((item, i) => (
+      {metricItems.map((item, i) => (
         <Card key={i} className='ring-foreground/10 shadow-none ring-1'>
-          <CardContent className='flex flex-col gap-2 px-4 py-3'>
-            <div className='flex items-center gap-2'>
-              <div className='bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-sm'>
-                {item.icon}
-              </div>
-              <span className='text-muted-foreground text-xs font-medium uppercase tracking-wider'>
+          <CardContent className='flex items-center gap-3 px-4 py-3'>
+            <div className='bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-md'>
+              {item.icon}
+            </div>
+            <div className='flex-1 min-w-0'>
+              <span className='text-muted-foreground text-xs font-medium'>
                 {item.label}
               </span>
-            </div>
-            <div className='flex items-baseline gap-1'>
-              <span className='text-xl sm:text-2xl font-semibold tabular-nums'>{item.value}</span>
-              {item.unit && (
-                <span className='text-muted-foreground text-sm'>{item.unit}</span>
+              <div className='flex items-baseline gap-1'>
+                <span className='text-xl sm:text-2xl font-semibold tabular-nums'>{item.value}</span>
+                {item.unit && (
+                  <span className='text-muted-foreground text-sm'>{item.unit}</span>
+                )}
+              </div>
+              {item.delta && (
+                <div className='flex items-center gap-1 mt-0.5'>
+                  {item.deltaDirection === 'up' ? (
+                    <TrendingUpIcon className='size-3 text-emerald-500' />
+                  ) : (
+                    <TrendingDownIcon className='size-3 text-red-500' />
+                  )}
+                  <span className={`text-xs ${item.deltaDirection === 'up' ? 'text-emerald-500' : 'text-red-500'}`}>
+                    {item.deltaDirection === 'up' ? '+' : ''}{item.delta.pct.toFixed(1)}%
+                  </span>
+                </div>
               )}
             </div>
-            {item.delta && (
-              <div className='flex items-center gap-1'>
-                {item.deltaDirection === 'up' ? (
-                  <TrendingUpIcon className='size-3.5 text-emerald-500' />
-                ) : (
-                  <TrendingDownIcon className='size-3.5 text-red-500' />
-                )}
-                <Badge
-                  variant='outline'
-                  className={
-                    item.deltaDirection === 'up'
-                      ? 'border-emerald-500/30 text-emerald-500'
-                      : 'border-red-500/30 text-red-500'
-                  }
-                >
-                  {item.deltaDirection === 'up' ? '+' : ''}
-                  {item.delta.pct.toFixed(1)}% vs {item.delta.label}
-                </Badge>
-              </div>
-            )}
           </CardContent>
         </Card>
       ))}
+      {/* Complaint card — distinct layout: stacked, wider */}
+      <Card className='ring-foreground/10 shadow-none ring-1 bg-destructive/5 sm:col-span-2 lg:col-span-1'>
+        <CardContent className='flex flex-col gap-1.5 px-4 py-3'>
+          <div className='flex items-center gap-2'>
+            <div className='bg-destructive/10 text-destructive flex size-8 shrink-0 items-center justify-center rounded-md'>
+              {complaintItem.icon}
+            </div>
+            <span className='text-muted-foreground text-xs font-medium'>
+              {complaintItem.label}
+            </span>
+          </div>
+          <p className='text-sm font-medium leading-snug pl-10'>{complaintItem.value}</p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

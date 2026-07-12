@@ -142,7 +142,7 @@ const CircularProgress = ({
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap={shape}
-          className={cn('transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]', progressClassName)}
+          className={cn('transition-all duration-700 ease-out', progressClassName)}
         />
       </svg>
       {showLabel && (

@@ -66,7 +66,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
   ])
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-4'>
       {/* Keyboard shortcut help overlay */}
       {showHelp && <KeyboardShortcutHelp onClose={() => setShowHelp(false)} />}
 
@@ -97,8 +97,8 @@ export default function DashboardView({ initialData, months, types, provinces }:
       </p>
 
       {/* Section 1: Trend + Insight narrative (side by side) */}
-      <section aria-labelledby='trend-heading'>
-        <h2 id='trend-heading' className='text-xl font-semibold mb-4'>
+      <section aria-labelledby='trend-heading' className='pt-2'>
+        <h2 id='trend-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
           What&apos;s changing over time
         </h2>
         <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>
@@ -112,8 +112,8 @@ export default function DashboardView({ initialData, months, types, provinces }:
       </section>
 
       {/* Section 2: Destination map + Scorecard table */}
-      <section aria-labelledby='focus-heading'>
-        <h2 id='focus-heading' className='text-xl font-semibold mb-4'>
+      <section aria-labelledby='focus-heading' className='pt-4'>
+        <h2 id='focus-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
           Where to focus, by destination
         </h2>
         <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
@@ -123,8 +123,8 @@ export default function DashboardView({ initialData, months, types, provinces }:
       </section>
 
       {/* Section 3: Analytics + Action panel */}
-      <section aria-labelledby='action-heading'>
-        <h2 id='action-heading' className='text-xl font-semibold mb-4'>
+      <section aria-labelledby='action-heading' className='pt-4'>
+        <h2 id='action-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
           Deep dive &amp; recommended actions
         </h2>
         <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>

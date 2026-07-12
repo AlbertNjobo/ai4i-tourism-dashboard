@@ -41,7 +41,7 @@ export default function FilterBar({
       <CardContent className='space-y-4'>
         {/* Row 1: Month + Reset */}
         <div className='flex flex-wrap items-center gap-3'>
-          <span className='text-muted-foreground text-xs font-medium uppercase tracking-wider'>
+          <span className='text-muted-foreground text-xs font-medium shrink-0'>
             Month
           </span>
           <Select value={filters.month} onValueChange={(v) => v && onMonthChange(v)}>
@@ -61,7 +61,7 @@ export default function FilterBar({
             <Button
               variant='ghost'
               size='default'
-              className='text-muted-foreground ml-auto underline h-11 px-4 text-xs'
+              className='text-muted-foreground ml-auto h-11 px-4 text-xs'
               onClick={onReset}
             >
               Reset filters
@@ -71,7 +71,7 @@ export default function FilterBar({
 
         {/* Row 2: Destination type */}
         <div className='flex flex-wrap items-center gap-3'>
-          <span className='text-muted-foreground text-xs font-medium uppercase tracking-wider shrink-0'>
+          <span className='text-muted-foreground text-xs font-medium shrink-0'>
             Type
           </span>
           <div className='flex flex-wrap gap-1.5' role='group' aria-label='Filter by destination type'>
@@ -92,7 +92,7 @@ export default function FilterBar({
 
         {/* Row 3: Province */}
         <div className='flex flex-wrap items-center gap-3'>
-          <span className='text-muted-foreground text-xs font-medium uppercase tracking-wider shrink-0'>
+          <span className='text-muted-foreground text-xs font-medium shrink-0'>
             Province
           </span>
           <div className='flex flex-wrap gap-1.5' role='group' aria-label='Filter by province'>

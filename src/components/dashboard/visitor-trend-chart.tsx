@@ -33,7 +33,7 @@ export default function VisitorTrendChart({ data }: { data: TrendPoint[] }) {
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <CardTitle className='text-base font-semibold'>
+        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>
           Visitors &amp; estimated spend, Jan – Jun 2026
         </CardTitle>
         <div className='flex gap-4 text-xs text-muted-foreground'>
@@ -48,7 +48,7 @@ export default function VisitorTrendChart({ data }: { data: TrendPoint[] }) {
         </div>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className='h-56 sm:h-72 w-full'>
+        <ChartContainer config={chartConfig} className='h-56 sm:h-72 w-full' role='img' aria-label='Line chart showing monthly visitor count and estimated spend from January to June 2026'>
           <ResponsiveContainer width='100%' height='100%'>
             <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray='3 3' stroke='var(--border)' />
