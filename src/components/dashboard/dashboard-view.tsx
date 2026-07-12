@@ -35,7 +35,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
     revenueByDestination,
     demographicsByDestination,
     insights,
-    resultCount,
+    resultCount
   } = useTourismData(initialData, months)
 
   const scrollToSection = useCallback((id: string) => {
@@ -62,7 +62,7 @@ export default function DashboardView({ initialData, months, types, provinces }:
     { key: '1', label: 'Jump to KPIs', action: () => scrollToSection('kpi-strip') },
     { key: '2', label: 'Jump to trend', action: () => scrollToSection('trend-heading') },
     { key: '3', label: 'Jump to destinations', action: () => scrollToSection('focus-heading') },
-    { key: '4', label: 'Jump to deep dive', action: () => scrollToSection('action-heading') },
+    { key: '4', label: 'Jump to deep dive', action: () => scrollToSection('action-heading') }
   ])
 
   return (
@@ -89,24 +89,29 @@ export default function DashboardView({ initialData, months, types, provinces }:
 
       {/* Context line */}
       <p className='text-muted-foreground text-sm'>
-        Zimbabwe tourism performance across 8 destinations, Jan – Jun 2026. Use the filters above to narrow by month, type, or province.
+        Zimbabwe tourism performance across 8 destinations, Jan – Jun 2026.{' '}
+        <b>Use the filters above to narrow by month, type, or province.</b>
       </p>
 
       {/* Result count */}
       <p className='text-muted-foreground text-sm'>
-        Showing {resultCount.destinations} destination{resultCount.destinations !== 1 ? 's' : ''}{' '}
-        &middot; {resultCount.records} monthly record{resultCount.records !== 1 ? 's' : ''}
-        <span className='ml-2 text-xs text-muted-foreground/60'>
-          Press <kbd className='inline-flex h-4 min-w-[16px] items-center justify-center rounded border bg-muted px-1 font-mono text-[10px]'>?</kbd> for shortcuts
+        Showing {resultCount.destinations} destination{resultCount.destinations !== 1 ? 's' : ''} &middot;{' '}
+        {resultCount.records} monthly record{resultCount.records !== 1 ? 's' : ''}
+        <span className='text-muted-foreground/60 ml-2 text-xs'>
+          Press{' '}
+          <kbd className='bg-muted inline-flex h-4 min-w-[16px] items-center justify-center rounded border px-1 font-mono text-[10px]'>
+            ?
+          </kbd>{' '}
+          for shortcuts
         </span>
       </p>
 
       {/* Section 1: Trend + Insight narrative (side by side) */}
       <section aria-labelledby='trend-heading' className='pt-2'>
-        <h2 id='trend-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
+        <h2 id='trend-heading' className='mb-3 text-lg font-semibold' style={{ textWrap: 'balance' }}>
           What&apos;s changing over time
         </h2>
-        <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-5'>
           <div className='lg:col-span-3'>
             <VisitorTrendChart data={trendData} />
           </div>
@@ -118,10 +123,10 @@ export default function DashboardView({ initialData, months, types, provinces }:
 
       {/* Section 2: Destination map + Scorecard table */}
       <section aria-labelledby='focus-heading' className='pt-4'>
-        <h2 id='focus-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
+        <h2 id='focus-heading' className='mb-3 text-lg font-semibold' style={{ textWrap: 'balance' }}>
           Where to focus, by destination
         </h2>
-        <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <DestinationMap destinations={destinations} />
           <ScorecardTable destinations={destinations} />
         </div>
@@ -129,10 +134,10 @@ export default function DashboardView({ initialData, months, types, provinces }:
 
       {/* Section 3: Analytics + Action panel */}
       <section aria-labelledby='action-heading' className='pt-4'>
-        <h2 id='action-heading' className='text-lg font-semibold mb-3' style={{ textWrap: 'balance' }}>
+        <h2 id='action-heading' className='mb-3 text-lg font-semibold' style={{ textWrap: 'balance' }}>
           Deep dive &amp; recommended actions
         </h2>
-        <div className='grid gap-6 grid-cols-1 lg:grid-cols-5'>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-5'>
           <div className='lg:col-span-3'>
             <ComplaintAnalysis
               data={complaintFrequencies}
