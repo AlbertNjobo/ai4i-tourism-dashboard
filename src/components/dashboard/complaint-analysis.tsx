@@ -15,19 +15,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell, Legend } from 'recharts'
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from 'recharts'
 import type { ComplaintFrequency, RevenuePoint, DemographicsPoint } from '@/types/tourism'
-
-const COLORS = [
-  'var(--chart-1)',
-  'var(--chart-2)',
-  'var(--chart-3)',
-  'var(--chart-4)',
-  'var(--chart-5)',
-  'var(--primary)',
-  'var(--destructive)',
-  'var(--muted-foreground)',
-]
 
 type ChartView = 'complaints' | 'revenue' | 'demographics'
 
@@ -62,11 +51,7 @@ function ComplaintChart({ data }: { data: ComplaintFrequency[] }) {
               />
             }
           />
-          <Bar dataKey='count' radius={[0, 4, 4, 0]} barSize={20}>
-            {data.map((_, index) => (
-              <Cell key={index} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Bar>
+          <Bar dataKey='count' radius={[0, 4, 4, 0]} barSize={20} fill='var(--chart-1)' />
         </BarChart>
       </ResponsiveContainer>
     </ChartContainer>

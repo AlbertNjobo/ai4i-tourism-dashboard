@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useMemo } from 'react'
 import type {
   TourismRecord,
   FilterState,
@@ -28,39 +28,11 @@ function mode(arr: string[]): { value: string; count: number } {
   return { value: best, count: bestN }
 }
 
-export function useTourismData(allData: TourismRecord[], months: string[]) {
-  const [filters, setFilters] = useState<FilterState>({
-    month: 'all',
-    types: new Set<string>(),
-    provinces: new Set<string>(),
-  })
-
-  const setMonth = useCallback((month: string) => {
-    setFilters(prev => ({ ...prev, month }))
-  }, [])
-
-  const toggleType = useCallback((type: string) => {
-    setFilters(prev => {
-      const next = new Set(prev.types)
-      if (next.has(type)) next.delete(type)
-      else next.add(type)
-      return { ...prev, types: next }
-    })
-  }, [])
-
-  const toggleProvince = useCallback((province: string) => {
-    setFilters(prev => {
-      const next = new Set(prev.provinces)
-      if (next.has(province)) next.delete(province)
-      else next.add(province)
-      return { ...prev, provinces: next }
-    })
-  }, [])
-
-  const resetFilters = useCallback(() => {
-    setFilters({ month: 'all', types: new Set(), provinces: new Set() })
-  }, [])
-
+export function useTourismData(
+  allData: TourismRecord[],
+  months: string[],
+  filters: FilterState,
+) {
   const filteredRows = useMemo(() => {
     return allData.filter(r => {
       if (filters.month !== 'all' && r.month !== filters.month) return false
@@ -263,11 +235,6 @@ export function useTourismData(allData: TourismRecord[], months: string[]) {
   }, [destinations])
 
   return {
-    filters,
-    setMonth,
-    toggleType,
-    toggleProvince,
-    resetFilters,
     filteredRows,
     kpis,
     trendData,

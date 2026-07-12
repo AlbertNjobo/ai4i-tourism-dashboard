@@ -25,11 +25,11 @@ function qualityColor(score: number): string {
 }
 
 // Zimbabwe bounds: roughly SW corner to NE corner
-const ZIMBABWE_CENTER: [number, number] = [-20.0, 30.0]
+const ZIMBABWE_CENTER: [number, number] = [-20.0, 29.5]
 
 const ZIMBABWE_BOUNDS: [[number, number], [number, number]] = [
-  [-22.5, 25.0], // SW
-  [-15.5, 33.0] // NE
+  [-22.2, 25.2], // SW
+  [-15.3, 33.0] // NE
 ]
 
 interface Props {
@@ -138,7 +138,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
 
     const map = L.map(mapId, {
       center: ZIMBABWE_CENTER,
-      zoom: 5,
+      zoom: 7,
       minZoom: 6,
       maxZoom: 12,
       maxBounds: ZIMBABWE_BOUNDS,
@@ -199,6 +199,12 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
         })
       }).addTo(map)
     })
+
+    // Auto-fit map to show all markers with padding
+    if (destinations.length > 0) {
+      const bounds = L.latLngBounds(destinations.map(d => [d.latitude, d.longitude]))
+      map.fitBounds(bounds.pad(0.15))
+    }
 
     // Store map reference for cleanup
     ;(container as any)._leaflet_map = map

@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import type { DestinationAgg } from '@/types/tourism'
 
 function fmt(n: number): string {
@@ -51,9 +52,18 @@ export default function ScorecardTable({ destinations }: { destinations: Destina
                 <TableHead>Destination</TableHead>
                 <TableHead className='text-right'>Visitors</TableHead>
                 <TableHead className='text-right'>Est. spend</TableHead>
-                <TableHead>Service quality</TableHead>
+                <TableHead>
+                  <Tooltip>
+                    <TooltipTrigger className='cursor-help underline decoration-dotted underline-offset-2'>
+                      Service quality
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Score 0–100 from visitor satisfaction surveys. Green ≥ 65, amber ≥ 45, red &lt; 45.
+                    </TooltipContent>
+                  </Tooltip>
+                </TableHead>
                 <TableHead>Digital booking</TableHead>
-                <TableHead>Top complaint</TableHead>
+                <TableHead className='min-w-[160px]'>Top complaint</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -83,7 +93,11 @@ export default function ScorecardTable({ destinations }: { destinations: Destina
                       {fmt1(d.avgDigitalBooking)}%
                     </Badge>
                   </TableCell>
-                  <TableCell className='text-muted-foreground text-sm'>{d.topComplaint}</TableCell>
+                  <TableCell className='text-muted-foreground text-sm'>
+                    <span className='line-clamp-2' title={d.topComplaint}>
+                      {d.topComplaint}
+                    </span>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
