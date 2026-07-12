@@ -51,4 +51,7 @@ pnpm build  # TypeScript check + static generation
 - No real-time data refresh
 
 ## Team
-[Team member names and roles]
+Lawrence Njobo - Lead Innovator 
+Mazvita Ziwira - UI/UX Designer 
+Anisha Mudani - Data Analyst 
+Tanatswa Mashumba - Technical Writer 
