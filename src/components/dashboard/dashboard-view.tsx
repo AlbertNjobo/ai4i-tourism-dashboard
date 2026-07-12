@@ -1,7 +1,9 @@
 'use client'
 
+import { useCallback } from 'react'
 import type { TourismRecord } from '@/types/tourism'
 import { useTourismData } from '@/hooks/use-tourism-data'
+import { useKeyboardShortcuts } from '@/hooks/use-keyboard-shortcuts'
 import KPIStrip from './kpi-strip'
 import FilterBar from './filter-bar'
 import VisitorTrendChart from './visitor-trend-chart'
@@ -10,6 +12,7 @@ import ScorecardTable from './scorecard-table'
 import InsightNarrative from './insight-narrative'
 import ActionPanel from './action-panel'
 import ComplaintAnalysis from './complaint-analysis'
+import KeyboardShortcutHelp from './keyboard-shortcuts'
 
 interface Props {
   initialData: TourismRecord[]
@@ -35,10 +38,42 @@ export default function DashboardView({ initialData, months, types, provinces }:
     resultCount,
   } = useTourismData(initialData, months)
 
+  const scrollToSection = useCallback((id: string) => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
+  const toggleTheme = useCallback(() => {
+    const html = document.documentElement
+    const isDark = html.classList.contains('dark')
+    html.classList.toggle('dark', !isDark)
+    html.classList.toggle('light', isDark)
+  }, [])
+
+  const focusMonthFilter = useCallback(() => {
+    const select = document.querySelector('[aria-label="Filter by month"]') as HTMLElement
+    if (select) select.focus()
+  }, [])
+
+  const { showHelp, setShowHelp } = useKeyboardShortcuts([
+    { key: 'm', label: 'Focus month filter', action: focusMonthFilter },
+    { key: 'r', label: 'Reset filters', action: resetFilters },
+    { key: 'd', label: 'Toggle dark mode', action: toggleTheme },
+    { key: '1', label: 'Jump to KPIs', action: () => scrollToSection('kpi-strip') },
+    { key: '2', label: 'Jump to trend', action: () => scrollToSection('trend-heading') },
+    { key: '3', label: 'Jump to destinations', action: () => scrollToSection('focus-heading') },
+    { key: '4', label: 'Jump to deep dive', action: () => scrollToSection('action-heading') },
+  ])
+
   return (
     <div className='flex flex-col gap-6'>
+      {/* Keyboard shortcut help overlay */}
+      {showHelp && <KeyboardShortcutHelp onClose={() => setShowHelp(false)} />}
+
       {/* KPI Strip */}
-      <KPIStrip kpis={kpis} />
+      <div id='kpi-strip'>
+        <KPIStrip kpis={kpis} />
+      </div>
 
       {/* Filter Bar */}
       <FilterBar
@@ -56,6 +91,9 @@ export default function DashboardView({ initialData, months, types, provinces }:
       <p className='text-muted-foreground text-sm'>
         Showing {resultCount.destinations} destination{resultCount.destinations !== 1 ? 's' : ''}{' '}
         &middot; {resultCount.records} monthly record{resultCount.records !== 1 ? 's' : ''}
+        <span className='ml-2 text-xs text-muted-foreground/60'>
+          Press <kbd className='inline-flex h-4 min-w-[16px] items-center justify-center rounded border bg-muted px-1 font-mono text-[10px]'>?</kbd> for shortcuts
+        </span>
       </p>
 
       {/* Section 1: Trend + Insight narrative (side by side) */}

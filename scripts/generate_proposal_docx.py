@@ -247,6 +247,33 @@ bullet("Multi-view analytics: A dropdown switches the deep-dive chart between co
 bullet("Color-coded quality signals: Red (< 55), amber (55-65), green (> 65) for service quality, digital booking, and other scores — consistent across all visualizations.")
 bullet("Responsive grid: 5-column grid at desktop, stacking to single column on mobile, with all touch targets ≥ 44×44px.")
 
+doc.add_heading("Wireframe — Layout Structure", level=2)
+
+para("Figure 1 shows the five-zone layout structure. Each zone corresponds to a storytelling step.")
+
+wireframe_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "proposal-pages")
+wireframe_layout = os.path.join(wireframe_dir, "wireframe-layout.png")
+if os.path.exists(wireframe_layout):
+    doc.add_picture(wireframe_layout, width=Inches(4.5))
+    doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    caption = doc.add_paragraph("Figure 1 — Dashboard layout: five zones from KPI overview to action recommendations", style="Normal")
+    caption.runs[0].font.size = Pt(9)
+    caption.runs[0].font.italic = True
+    caption.runs[0].font.color.rgb = RGBColor(0x66, 0x66, 0x66)
+
+doc.add_heading("Screenshot — Live Dashboard", level=2)
+
+para("Figure 2 shows the deployed Atlas dashboard in its default state.")
+
+screenshot_full = os.path.join(wireframe_dir, "screenshot-full.png")
+if os.path.exists(screenshot_full):
+    doc.add_picture(screenshot_full, width=Inches(5.0))
+    doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    caption = doc.add_paragraph("Figure 2 — Atlas dashboard: KPIs, filters, trend chart, map, scorecard, deep-dive, and actions", style="Normal")
+    caption.runs[0].font.size = Pt(9)
+    caption.runs[0].font.italic = True
+    caption.runs[0].font.color.rgb = RGBColor(0x66, 0x66, 0x66)
+
 # ── SECTION 3: Storytelling Narrative & Flow ───────────────────────────
 
 doc.add_page_break()
