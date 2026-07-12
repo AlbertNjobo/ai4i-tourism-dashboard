@@ -1,8 +1,4 @@
-<p align="center">
-  <a href="http://localhost:3000/dashboard">
-    <img src="docs/atlas-system.png" alt="Atlas Architecture" width="100%">
-  </a>
-</p>
+
 
 <h1 align="center">Atlas</h1>
 
