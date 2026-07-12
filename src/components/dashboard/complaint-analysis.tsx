@@ -165,7 +165,10 @@ export default function ComplaintAnalysis({
         <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4'>
           <div>
             <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>{titles[view]}</CardTitle>
-            <p className='text-muted-foreground text-xs'>{subtitles[view]}</p>
+            <p className='text-muted-foreground text-xs'>
+              {subtitles[view]}
+              <span className='ml-1 text-muted-foreground/50'>· Switch views with the dropdown</span>
+            </p>
           </div>
           <Select value={view} onValueChange={(v) => v && setView(v as ChartView)}>
             <SelectTrigger className='w-full sm:w-48 h-11' aria-label='Select chart view'>

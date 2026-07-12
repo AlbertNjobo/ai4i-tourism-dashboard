@@ -87,7 +87,7 @@ export default function DestinationMap({ destinations }: Props) {
             High quality
           </span>
           <span className='text-muted-foreground/60 ml-auto italic'>
-            Circle size = visitor volume
+            Circle size = visitor volume · Click a marker for details
           </span>
         </div>
         <p className='text-muted-foreground/60 text-[11px] italic'>

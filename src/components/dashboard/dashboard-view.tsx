@@ -87,6 +87,11 @@ export default function DashboardView({ initialData, months, types, provinces }:
         onReset={resetFilters}
       />
 
+      {/* Context line */}
+      <p className='text-muted-foreground text-sm'>
+        Zimbabwe tourism performance across 8 destinations, Jan – Jun 2026. Use the filters above to narrow by month, type, or province.
+      </p>
+
       {/* Result count */}
       <p className='text-muted-foreground text-sm'>
         Showing {resultCount.destinations} destination{resultCount.destinations !== 1 ? 's' : ''}{' '}
