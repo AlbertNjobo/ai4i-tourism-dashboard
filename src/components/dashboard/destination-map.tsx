@@ -67,7 +67,7 @@ export default function DestinationMap({ destinations }: Props) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='bg-muted h-64 animate-pulse rounded-lg sm:h-80' />
+          <div className='bg-muted h-80 animate-pulse rounded-lg sm:h-[480px]' />
         </CardContent>
       </Card>
     )
@@ -81,8 +81,7 @@ export default function DestinationMap({ destinations }: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent className='space-y-3'>
-        <LeafletMap destinations={destinations} />
-        <div className='text-muted-foreground flex flex-wrap items-center gap-2 text-xs sm:gap-4'>
+        <LeafletMap destinations={destinations} />        <div className='text-muted-foreground flex flex-wrap items-center gap-2 text-xs sm:gap-4'>
           <span className='flex items-center gap-1.5'>
             <span className='inline-block size-2.5 rounded-full bg-red-500' />
             Low quality
@@ -224,7 +223,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
   return (
     <div
       id='tourism-map'
-      className='h-64 w-full rounded-lg sm:h-80'
+      className='h-80 w-full rounded-lg sm:h-[480px]'
       style={{ zIndex: 0 }}
       role='img'
       aria-label='Interactive map of Zimbabwe tourism destinations. Circle size shows visitor volume, color shows service quality.'
