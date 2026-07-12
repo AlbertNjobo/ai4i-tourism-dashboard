@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://localhost:3000/dashboard">
-    <img src="docs/atlas-architecture-screenshot.png" alt="Atlas Architecture" width="100%">
+    <img src="docs/atlas-system.png" alt="Atlas Architecture" width="100%">
   </a>
 </p>
 
@@ -75,7 +75,7 @@ pnpm dev
 ## Architecture
 
 <p align="center">
-  <img src="docs/atlas-architecture-screenshot.png" alt="System Architecture" width="80%">
+  <img src="docs/atlas-system.png" alt="System Architecture" width="80%">
 </p>
 
 | Layer | Technology | Purpose |
