@@ -74,3 +74,5 @@ docs/atlas-architecture-screenshot.png
 # Misc
 *.pem
 *.log
+.mimocode/.cron-lock
+/.mimocode
