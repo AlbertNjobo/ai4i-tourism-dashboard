@@ -186,17 +186,20 @@ story.append(bullet("Reactive intervention — Complaint themes are identified o
 story.append(subsection("Target Users"))
 
 # User personas table
+table_cell = ParagraphStyle("TableCell", parent=body, fontSize=9.5, leading=12, spaceAfter=0)
+table_cell_bold = ParagraphStyle("TableCellBold", parent=table_cell, fontName="Helvetica-Bold")
+
 personas_data = [
-    ["Persona", "Role", "Decision Need"],
-    ["Tourism Authority Analyst", "Zimbabwe Tourism Authority, Harare",
-     "Which destinations need immediate attention? Where should marketing budget be allocated?"],
-    ["Destination Manager", "Victoria Falls, Great Zimbabwe, etc.",
-     "How is my destination performing vs peers? What service gaps should I address first?"],
-    ["Local Business Association", "Hospitality operators at each destination",
-     "What visitor trends affect my business? Should I invest in digital booking?"],
+    [Paragraph("Persona", table_cell_bold), Paragraph("Role", table_cell_bold), Paragraph("Decision Need", table_cell_bold)],
+    [Paragraph("Tourism Authority Analyst", table_cell_bold), Paragraph("Zimbabwe Tourism Authority, Harare", table_cell),
+     Paragraph("Which destinations need immediate attention? Where should marketing budget be allocated?", table_cell)],
+    [Paragraph("Destination Manager", table_cell_bold), Paragraph("Victoria Falls, Great Zimbabwe, etc.", table_cell),
+     Paragraph("How is my destination performing vs peers? What service gaps should I address first?", table_cell)],
+    [Paragraph("Local Business Association", table_cell_bold), Paragraph("Hospitality operators at each destination", table_cell),
+     Paragraph("What visitor trends affect my business? Should I invest in digital booking?", table_cell)],
 ]
 
-personas_table = Table(personas_data, colWidths=[1.5 * inch, 1.8 * inch, 3.2 * inch])
+personas_table = Table(personas_data, colWidths=[1.6 * inch, 2.0 * inch, 2.9 * inch])
 personas_table.setStyle(TableStyle([
     ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#26324A")),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
@@ -285,27 +288,27 @@ story.append(para(
 
 # Storytelling flow table
 flow_data = [
-    ["Step", "Dashboard Section", "What the User Sees"],
-    ["1. Overview / Problem",
-     "KPI Strip (5 cards)",
-     "Total visitors (144,096), estimated spend ($13.6M), avg service quality (73.7/100), "
-     "avg digital booking (45.6%), top complaint (Sanitation). Immediate sense of scale and priority."],
-    ["2. Data Exploration",
-     "Filter Bar + Trend Chart",
-     "Month dropdown, type chips, province chips. Dual-axis chart shows visitor and spend trends "
-     "Jan–Jun. User can filter by any combination and see all visualizations update instantly."],
-    ["3. Key Insights",
-     "Insight Narrative Panel",
-     "Auto-generated bullets: Victoria Falls drives 52% of spend. National visitation up 32%. "
-     "Sanitation is top complaint at 7 of 8 destinations. Gonarezhou has clearest digital booking gap."],
-    ["4. Recommended Actions",
-     "Action Panel (3 cards)",
-     "Priority 1: Fast-track online booking at Gonarezhou Gateway (revenue leakage). "
+    [Paragraph("Step", table_cell_bold), Paragraph("Dashboard Section", table_cell_bold), Paragraph("What the User Sees", table_cell_bold)],
+    [Paragraph("1. Overview / Problem", table_cell_bold),
+     Paragraph("KPI Strip (5 cards)", table_cell),
+     Paragraph("Total visitors (144,096), estimated spend ($13.6M), avg service quality (73.7/100), "
+     "avg digital booking (45.6%), top complaint (Sanitation). Immediate sense of scale and priority.", table_cell)],
+    [Paragraph("2. Data Exploration", table_cell_bold),
+     Paragraph("Filter Bar + Trend Chart", table_cell),
+     Paragraph("Month dropdown, type chips, province chips. Dual-axis chart shows visitor and spend trends "
+     "Jan–Jun. User can filter by any combination and see all visualizations update instantly.", table_cell)],
+    [Paragraph("3. Key Insights", table_cell_bold),
+     Paragraph("Insight Narrative Panel", table_cell),
+     Paragraph("Auto-generated bullets: Victoria Falls drives 52% of spend. National visitation up 32%. "
+     "Sanitation is top complaint at 7 of 8 destinations. Gonarezhou has clearest digital booking gap.", table_cell)],
+    [Paragraph("4. Recommended Actions", table_cell_bold),
+     Paragraph("Action Panel (3 cards)", table_cell),
+     Paragraph("Priority 1: Fast-track online booking at Gonarezhou Gateway (revenue leakage). "
      "Priority 2: Review service delivery at Great Zimbabwe (service quality). "
-     "Priority 3: Address sanitation as a national cross-site issue."],
+     "Priority 3: Address sanitation as a national cross-site issue.", table_cell)],
 ]
 
-flow_table = Table(flow_data, colWidths=[1.3 * inch, 1.8 * inch, 3.4 * inch])
+flow_table = Table(flow_data, colWidths=[1.3 * inch, 1.6 * inch, 3.6 * inch])
 flow_table.setStyle(TableStyle([
     ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#26324A")),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
@@ -499,7 +502,7 @@ def add_page_number(canvas, doc):
 # ── Build ───────────────────────────────────────────────────────────────
 
 output_path = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "docs",
     "AI4I_Proposal_Design.pdf",
 )

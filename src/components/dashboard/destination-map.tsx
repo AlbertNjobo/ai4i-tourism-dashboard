@@ -100,6 +100,7 @@ export default function DestinationMap({ destinations }: Props) {
 
 function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
   const [L, setL] = useState<typeof import('leaflet') | null>(null)
+  const mapRef = useState<{ remove(): void } | null>(null)
 
   useEffect(() => {
     import('leaflet').then((leaflet) => {
@@ -114,10 +115,16 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
     const container = document.getElementById(mapId)
     if (!container) return
 
-    // Clean up existing map
+    // Clean up any existing map on this container
     const existingMap = (container as any)._leaflet_map
     if (existingMap) {
-      existingMap.remove()
+      try { existingMap.remove() } catch {}
+      delete (container as any)._leaflet_map
+    }
+
+    // Also try removing via Leaflet's internal check
+    if ((container as any)._leaflet_id) {
+      delete (container as any)._leaflet_id
     }
 
     const map = L.map(mapId, {
@@ -188,7 +195,17 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
     ;(container as any)._leaflet_map = map
 
     return () => {
-      map.remove()
+      try {
+        map.remove()
+      } catch {}
+      // Clear all Leaflet internal state from the container
+      if (container) {
+        delete (container as any)._leaflet_map
+        delete (container as any)._leaflet_id
+        // Remove any Leaflet-added classes or attributes
+        container.removeAttribute('data-leaflet')
+        container.innerHTML = ''
+      }
     }
   }, [L, destinations])
 
