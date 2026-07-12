@@ -14,14 +14,16 @@
 │  │ Server:     │  │ Client:                  │  │
 │  │ CSV Loader  │→ │ DashboardView            │  │
 │  │ (build time)│  │  ├─ KPIStrip             │  │
-│  └─────────────┘  │  ├─ FilterBar            │  │
-│                   │  ├─ VisitorTrendChart     │  │
+│  └─────────────┘  │  ├─ VisitorTrendChart     │  │
 │  ┌─────────────┐  │  ├─ DestinationMap       │  │
 │  │ public/data/│  │  ├─ ScorecardTable       │  │
 │  │ CSV file    │  │  ├─ InsightNarrative     │  │
 │  └─────────────┘  │  ├─ ActionPanel          │  │
-│                   │  └─ ComplaintAnalysis    │  │
-│                   └──────────────────────────┘  │
+│  ┌─────────────┐  │  └─ ComplaintAnalysis    │  │
+│  │ Sidebar:    │  └──────────────────────────┘  │
+│  │ FilterPanel │                                │
+│  │ (left side) │                                │
+│  └─────────────┘                                │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -31,28 +33,33 @@
 |-----------|------|-----------|
 | `csv-loader.ts` | Server-side CSV parser | Reads `public/data/*.csv` → `TourismRecord[]` |
 | `dashboard/page.tsx` | Server component | Calls `loadTourismData()`, passes to client |
-| `dashboard-view.tsx` | Client orchestrator | Holds filter state, computes derived data |
-| `use-tourism-data.ts` | Client hook | Filter logic, KPI aggregation, insight computation |
+| `dashboard-view.tsx` | Client orchestrator | Consumes FilterContext, computes derived data |
+| `filter-context.tsx` | Shared filter state | FilterProvider wraps layout, shared between Sidebar and DashboardView |
+| `use-tourism-data.ts` | Client hook | Accepts external filters, computes KPI aggregation, insights |
 | `kpi-strip.tsx` | KPI cards | Receives computed KPI data |
-| `filter-bar.tsx` | Filter controls | Month select, type/province chips |
+| `sidebar.tsx` (layout) | Filter panel | Month dropdown, type/province checkmark options, reset |
 | `visitor-trend-chart.tsx` | Line chart | Recharts dual-axis (visitors + spend) |
-| `destination-map.tsx` | SVG bubble map | Destination positions + visitor volume |
+| `destination-map.tsx` | Leaflet map | Destination circle markers with auto-fit bounds |
 | `scorecard-table.tsx` | Data table | Destination comparison with pills/bars |
 | `insight-narrative.tsx` | Auto-generated text | Computed from filtered data |
 | `action-panel.tsx` | Recommendation cards | Derived from insights |
-| `complaint-analysis.tsx` | Bar chart | Complaint theme frequency |
+| `complaint-analysis.tsx` | Bar chart | Complaint theme frequency (single color) |
 
 ## Data Flow
 
 1. **Build time**: `csv-loader.ts` reads CSV, parses to `TourismRecord[]`
 2. **Server render**: Page component passes data as props to `DashboardView`
-3. **Client state**: `useTourismData` hook manages filter state (month, types, provinces)
-4. **Derived data**: Hook computes KPIs, trend data, destination aggregations, insights
-5. **Re-render**: Filter changes trigger recomputation → UI updates
+3. **Shared state**: `FilterProvider` in layout wraps both Sidebar and DashboardView
+4. **Sidebar reads/writes**: Filter controls read filter state and toggle callbacks from context
+5. **DashboardView**: Registers months/types/provinces with context, passes context filters to `useTourismData`
+6. **Derived data**: Hook computes KPIs, trend data, destination aggregations, insights
+7. **Re-render**: Filter changes in Sidebar trigger context update → DashboardView recomputes → UI updates
 
 ## Key Decisions
 
 - **CSV parsed at build time** (not runtime) for fast page loads and static export compatibility
-- **Single client hook** (`useTourismData`) centralizes all filter logic and derived data
+- **FilterContext** shares filter state between Sidebar (controls) and DashboardView (data) without prop drilling
+- **Filters in left sidebar** instead of horizontal band — always visible while scrolling, familiar pattern for dashboards
 - **shadcn/ui components** for WCAG-compliant, accessible UI primitives
 - **Recharts** for accessible chart rendering with built-in ARIA support
+- **Leaflet** for interactive map with auto-fit bounds to Zimbabwe destinations
