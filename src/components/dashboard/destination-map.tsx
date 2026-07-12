@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { DestinationAgg } from '@/types/tourism'
 
@@ -19,14 +20,16 @@ function fmt1(n: number): string {
 function qualityColor(score: number): string {
   if (score < 55) return '#ef4444'
   if (score < 70) return '#f59e0b'
+
   return '#10b981'
 }
 
 // Zimbabwe bounds: roughly SW corner to NE corner
 const ZIMBABWE_CENTER: [number, number] = [-20.0, 30.0]
+
 const ZIMBABWE_BOUNDS: [[number, number], [number, number]] = [
   [-22.5, 25.0], // SW
-  [-15.5, 33.0], // NE
+  [-15.5, 33.0] // NE
 ]
 
 interface Props {
@@ -44,7 +47,9 @@ export default function DestinationMap({ destinations }: Props) {
     return (
       <Card className='ring-foreground/10 shadow-none ring-1'>
         <CardHeader>
-          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
+          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>
+            Destination map
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className='text-muted-foreground text-sm'>No destinations match the current filters.</p>
@@ -57,10 +62,12 @@ export default function DestinationMap({ destinations }: Props) {
     return (
       <Card className='ring-foreground/10 shadow-none ring-1'>
         <CardHeader>
-          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
+          <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>
+            Destination map
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='bg-muted h-64 sm:h-80 animate-pulse rounded-lg' />
+          <div className='bg-muted h-64 animate-pulse rounded-lg sm:h-80' />
         </CardContent>
       </Card>
     )
@@ -69,11 +76,13 @@ export default function DestinationMap({ destinations }: Props) {
   return (
     <Card className='ring-foreground/10 shadow-none ring-1'>
       <CardHeader>
-        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>Destination map</CardTitle>
+        <CardTitle className='text-base font-semibold' style={{ textWrap: 'balance' }}>
+          Destination map
+        </CardTitle>
       </CardHeader>
       <CardContent className='space-y-3'>
         <LeafletMap destinations={destinations} />
-        <div className='flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-muted-foreground'>
+        <div className='text-muted-foreground flex flex-wrap items-center gap-2 text-xs sm:gap-4'>
           <span className='flex items-center gap-1.5'>
             <span className='inline-block size-2.5 rounded-full bg-red-500' />
             Low quality
@@ -90,9 +99,6 @@ export default function DestinationMap({ destinations }: Props) {
             Circle size = visitor volume · Click a marker for details
           </span>
         </div>
-        <p className='text-muted-foreground/60 text-[11px] italic'>
-          Positions are approximate centroids for prototyping only. Not official geography.
-        </p>
       </CardContent>
     </Card>
   )
@@ -103,7 +109,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
   const mapRef = useState<{ remove(): void } | null>(null)
 
   useEffect(() => {
-    import('leaflet').then((leaflet) => {
+    import('leaflet').then(leaflet => {
       setL(leaflet)
     })
   }, [])
@@ -113,12 +119,16 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
 
     const mapId = 'tourism-map'
     const container = document.getElementById(mapId)
+
     if (!container) return
 
     // Clean up any existing map on this container
     const existingMap = (container as any)._leaflet_map
+
     if (existingMap) {
-      try { existingMap.remove() } catch {}
+      try {
+        existingMap.remove()
+      } catch {}
       delete (container as any)._leaflet_map
     }
 
@@ -135,13 +145,13 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
       maxBounds: ZIMBABWE_BOUNDS,
       maxBoundsViscosity: 1.0,
       zoomControl: true,
-      attributionControl: true,
+      attributionControl: true
     })
 
     // OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 18,
+      maxZoom: 18
     }).addTo(map)
 
     // Add destination markers
@@ -156,7 +166,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
         fillColor: color,
         fillOpacity: 0.55,
         color,
-        weight: 1.5,
+        weight: 1.5
       }).addTo(map)
 
       // Invisible touch target overlay (min 22px radius = 44px diameter)
@@ -165,7 +175,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
         fillColor: 'transparent',
         fillOpacity: 0,
         color: 'transparent',
-        opacity: 0,
+        opacity: 0
       }).addTo(map)
 
       touchTarget.bindPopup(`
@@ -186,8 +196,8 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
         icon: L.divIcon({
           className: '',
           html: `<div style="font-size: 10px; font-weight: 500; color: #1e293b; white-space: nowrap; text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white; pointer-events: none;">${dest.destination}</div>`,
-          iconAnchor: [0, -radius - 4],
-        }),
+          iconAnchor: [0, -radius - 4]
+        })
       }).addTo(map)
     })
 
@@ -198,10 +208,12 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
       try {
         map.remove()
       } catch {}
+
       // Clear all Leaflet internal state from the container
       if (container) {
         delete (container as any)._leaflet_map
         delete (container as any)._leaflet_id
+
         // Remove any Leaflet-added classes or attributes
         container.removeAttribute('data-leaflet')
         container.innerHTML = ''
@@ -212,7 +224,7 @@ function LeafletMap({ destinations }: { destinations: DestinationAgg[] }) {
   return (
     <div
       id='tourism-map'
-      className='h-64 sm:h-80 w-full rounded-lg'
+      className='h-64 w-full rounded-lg sm:h-80'
       style={{ zIndex: 0 }}
       role='img'
       aria-label='Interactive map of Zimbabwe tourism destinations. Circle size shows visitor volume, color shows service quality.'
