@@ -1,5 +1,5 @@
 const themeConfig = {
-  templateName: 'AI4I Tourism',
+  templateName: 'Atlas',
   homePageUrl: '/dashboard'
 } as const
 

@@ -1,4 +1,4 @@
-# Zimbabwe Tourism Destination Insights
+# Atlas — Zimbabwe Tourism Destination Insights
 
 ## Problem
 Tourism authorities and destination managers in Zimbabwe lack a unified, interactive view of visitor trends, spend patterns, service quality, and complaint themes across the country's eight national tourism destinations. Without this visibility, resource allocation and intervention decisions are made on intuition rather than evidence.

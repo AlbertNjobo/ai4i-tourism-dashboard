@@ -110,9 +110,13 @@ def bold_para(label, text):
 for _ in range(6):
     doc.add_paragraph()
 
-title = doc.add_paragraph("Zimbabwe Tourism\nDestination Insights", style="Title")
+title = doc.add_paragraph("Atlas", style="Title")
 title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-title.runs[0].font.size = Pt(28)
+title.runs[0].font.size = Pt(32)
+
+subtitle2 = doc.add_paragraph("Zimbabwe Tourism\nDestination Insights", style="Subtitle")
+subtitle2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+subtitle2.runs[0].font.size = Pt(16)
 
 doc.add_paragraph()
 

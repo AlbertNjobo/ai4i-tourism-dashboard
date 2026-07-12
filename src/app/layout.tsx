@@ -30,15 +30,15 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Zimbabwe Tourism Destination Insights — AI4I Design Track',
+  title: 'Atlas — Zimbabwe Tourism Destination Insights',
   description:
     'Interactive dashboard for tourism authorities and destination managers. Monthly visitor, spend, and service-quality signals across eight national destinations.',
   openGraph: {
-    title: 'Zimbabwe Tourism Destination Insights — AI4I Design Track',
+    title: 'Atlas — Zimbabwe Tourism Destination Insights',
     description:
       'Interactive dashboard for tourism authorities and destination managers. Monthly visitor, spend, and service-quality signals across eight national destinations.',
     type: 'website',
-    siteName: 'AI4I Tourism Dashboard',
+    siteName: 'Atlas',
   },
 }
 

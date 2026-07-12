@@ -127,7 +127,9 @@ story = []
 # ── COVER PAGE (not counted) ───────────────────────────────────────────
 
 story.append(Spacer(1, 2.0 * inch))
-story.append(Paragraph("Zimbabwe Tourism<br/>Destination Insights", title_style))
+story.append(Paragraph("Atlas", title_style))
+story.append(Spacer(1, 0.15 * inch))
+story.append(Paragraph("Zimbabwe Tourism<br/>Destination Insights", ParagraphStyle("CoverSubtitle2", parent=subtitle_style, fontSize=14, leading=18)))
 story.append(Spacer(1, 0.3 * inch))
 story.append(Paragraph("Data Experience Design and Storytelling using Tourism Destination Insights", subtitle_style))
 story.append(Spacer(1, 0.6 * inch))
@@ -514,8 +516,8 @@ doc = SimpleDocTemplate(
     rightMargin=1 * inch,
     topMargin=1 * inch,
     bottomMargin=1 * inch,
-    title="Zimbabwe Tourism Destination Insights — AI4I Design Track",
-    author="AI4I Tourism Dashboard Team",
+    title="Atlas — Zimbabwe Tourism Destination Insights",
+    author="Atlas Tourism Dashboard Team",
 )
 
 doc.build(story, onFirstPage=add_page_number, onLaterPages=add_page_number)
